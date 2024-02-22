@@ -39,9 +39,8 @@ var entropia = -probabilidades.reduce(function (sum, probabilidad) {
     return sum + probabilidad * Math.log2(probabilidad);
 }, 0);
 
-console.log("Entropía de Shannon:", entropia.toFixed(6)); // Redondear a 4 decimales y mostrar en la consola
-
-
+var entropiaElemento = document.getElementById('entropiaResultado');
+entropiaElemento.textContent = "Entropía de Shannon: " + entropia.toFixed(6);
 // Llenar la tabla con los resultados ordenados y la probabilidad calculada
 for (var i = 0; i < resultadosOrdenados.length; i++) {
     var row = table.insertRow(i + 1);
