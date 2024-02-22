@@ -28,6 +28,19 @@ var headerCell3 = headerRow.insertCell(2);
 headerCell1.textContent = 'Carácter';
 headerCell2.textContent = 'Apariciones';
 headerCell3.textContent = 'Probabilidad';
+var totalCaracteres = inputText.length;
+
+var probabilidades = Object.entries(contador).map(function (entry) {
+    return entry[1] / totalCaracteres;
+});
+
+// Calcular la entropía de Shannon
+var entropia = -probabilidades.reduce(function (sum, probabilidad) {
+    return sum + probabilidad * Math.log2(probabilidad);
+}, 0);
+
+console.log("Entropía de Shannon:", entropia.toFixed(6)); // Redondear a 4 decimales y mostrar en la consola
+
 
 // Llenar la tabla con los resultados ordenados y la probabilidad calculada
 for (var i = 0; i < resultadosOrdenados.length; i++) {
@@ -36,6 +49,9 @@ for (var i = 0; i < resultadosOrdenados.length; i++) {
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var caracter = resultadosOrdenados[i][0];
+    if (caracter==" "){
+        caracter = "espacio"
+    }
     var apariciones = resultadosOrdenados[i][1];
     var probabilidad = (apariciones / totalCaracteres).toFixed(6); // Redondear a 2 decimales
     cell1.textContent = caracter;
